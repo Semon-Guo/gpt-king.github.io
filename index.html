@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>你的品牌｜官方站点</title>
+  <meta name="description" content="一个极简、响应式的一页式网站模板。包含产品展示、购买按钮、关于与联系方式。" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    :root{
+      --bg:#0b1220;          /* 深色背景 */
+      --panel:#0f172a;       /* 卡片背景 */
+      --muted:#94a3b8;       /* 次要文字 */
+      --fg:#e2e8f0;          /* 主文字 */
+      --accent:#38bdf8;      /* 主色 */
+      --accent-2:#22d3ee;    /* 渐变辅色 */
+      --ring:rgba(56,189,248,.45); /* focus ring */
+      --ok:#34d399; --warn:#f59e0b; --err:#f87171;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(2,6,23,.45);
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:radial-gradient(1200px 600px at 10% -10%,rgba(34,211,238,.12),transparent 60%),radial-gradient(900px 500px at 90% -20%,rgba(56,189,248,.12),transparent 60%),var(--bg);color:var(--fg);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,PingFang SC,Noto Sans SC,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;border-radius:12px}
+    .container{max-width:var(--max);margin:0 auto;padding:0 20px}
+    .btn{display:inline-flex;align-items:center;gap:.6em;border:1px solid rgba(226,232,240,.12);padding:.85em 1.2em;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#001018;font-weight:700;box-shadow:var(--shadow)}
+    .btn.ghost{background:transparent;color:var(--fg)}
+    .btn:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+    /* 顶部导航 */
+    .nav{position:sticky;top:0;backdrop-filter:saturate(180%) blur(8px);background:rgba(2,6,23,.6);border-bottom:1px solid rgba(148,163,184,.15);z-index:50}
+    .nav>.container{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{display:flex;align-items:center;gap:.7em;font-weight:800;letter-spacing:.4px}
+    .brand-badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 6px 16px rgba(34,211,238,.35)}
+    .links{display:flex;align-items:center;gap:22px}
+    .links a{opacity:.9}
+    .links a:hover{opacity:1}
+    .menu-btn{display:none}
+
+    /* 首屏 */
+    .hero{padding:84px 0 52px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+    h1{font-size:clamp(28px,4vw,48px);line-height:1.15;margin:.2em 0 .4em}
+    .lead{color:var(--muted);font-size:clamp(16px,2.2vw,18px)}
+    .cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+    .glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(148,163,184,.18);box-shadow:var(--shadow);border-radius:var(--radius)}
+
+    /* 特性 */
+    .features{padding:40px 0}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{padding:22px}
+    .kicker{color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem}
+    .subtle{color:var(--muted)}
+
+    /* 产品 */
+    .section{padding:64px 0}
+    .section h2{font-size:clamp(22px,3.6vw,34px);margin:0 0 12px}
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .product{display:flex;flex-direction:column;gap:10px}
+    .price{font-weight:800}
+    .product .card{padding:14px}
+
+    /* 关于/联系 */
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    form{display:grid;gap:10px}
+    input,textarea{padding:12px 14px;border-radius:12px;border:1px solid rgba(148,163,184,.22);background:#0b1220;color:var(--fg)}
+    input:focus,textarea:focus{outline:3px solid var(--ring);border-color:transparent}
+    .hint{font-size:.9rem;color:var(--muted)}
+
+    /* 页脚 */
+    footer{padding:40px 0;border-top:1px solid rgba(148,163,184,.15);color:var(--muted)}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .policies{display:flex;gap:14px;flex-wrap:wrap}
+
+    /* 响应式 */
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .products{grid-template-columns:repeat(2,1fr)}
+      .about{grid-template-columns:1fr}
+    }
+
+    @media (max-width:640px){
+      .links{display:none}
+      .menu-btn{display:inline-flex;align-items:center;gap:8px}
+      .drawer{display:none;position:fixed;inset:60px 12px auto 12px;padding:14px;background:rgba(2,6,23,.92);backdrop-filter:blur(8px);border:1px solid rgba(148,163,184,.2);border-radius:16px}
+      .drawer a{display:block;padding:12px;border-radius:10px}
+      .drawer a:hover{background:rgba(148,163,184,.08)}
+      .products{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <nav id="top" class="nav">
+    <div class="container">
+      <a href="#top" class="brand" aria-label="返回顶部">
+        <span class="brand-badge" aria-hidden="true"></span>
+        <span>你的品牌</span>
+      </a>
+      <div class="links" aria-label="网站导航">
+        <a href="#products">产品</a>
+        <a href="#about">关于</a>
+        <a href="#contact">联系</a>
+        <a href="#policies">政策</a>
+      </div>
+      <button class="menu-btn btn ghost" aria-controls="drawer" aria-expanded="false">菜单</button>
+    </div>
+    <div id="drawer" class="drawer container">
+      <a href="#products">产品</a>
+      <a href="#about">关于</a>
+      <a href="#contact">联系</a>
+      <a href="#policies">政策</a>
+    </div>
+  </nav>
+
+  <!-- 首屏 -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker">全新上线</span>
+        <h1>用一个简洁的网站，<br>把你的产品卖向世界</h1>
+        <p class="lead">这是一份可直接部署的一页式网站模板：极简设计、移动优先、内置产品区与购买按钮。把图片与价格替换成你的，就可以开卖。</p>
+        <div class="cta">
+          <a class="btn" href="#products" aria-label="跳转到产品区">立即选购</a>
+          <a class="btn ghost" href="#about" aria-label="了解品牌">了解我们</a>
+        </div>
+      </div>
+      <div class="glass" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop" alt="你的主打产品场景图（示意）" />
+      </div>
+    </div>
+  </header>
+
+  <!-- 特性 -->
+  <section class="features container">
+    <div class="grid-3">
+      <div class="card glass">
+        <h3>5 分钟改造</h3>
+        <p class="subtle">替换 Logo、文案、图片与价格即可上线；结构清晰，便于后续扩展。</p>
+      </div>
+      <div class="card glass">
+        <h3>移动优先</h3>
+        <p class="subtle">自适应布局与触控优化，覆盖大多数手机与平板访问场景。</p>
+      </div>
+      <div class="card glass">
+        <h3>可接入支付</h3>
+        <p class="subtle">按钮支持跳转至 Stripe/PayPal/微信支付页面或你的客服/小程序。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 产品 -->
+  <section id="products" class="section container">
+    <h2>热卖产品</h2>
+    <p class="subtle" style="margin-bottom:18px">示例：把图片、标题、价格与按钮链接替换为你的产品。也可复制结构新增更多卡片。</p>
+    <div class="products">
+      <!-- 产品卡片 1 -->
+      <article class="product glass">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1200&auto=format&fit=crop" alt="产品 A 图" />
+        </div>
+        <h3>产品 A</h3>
+        <p class="subtle">一句话卖点文案，突出核心价值。</p>
+        <div class="price">¥ 299</div>
+        <div>
+          <a class="btn" href="#" data-paylink title="前往支付或咨询">立即购买</a>
+        </div>
+      </article>
+      <!-- 产品卡片 2 -->
+      <article class="product glass">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1510520619981-3d3985f26b21?q=80&w=1200&auto=format&fit=crop" alt="产品 B 图" />
+        </div>
+        <h3>产品 B</h3>
+        <p class="subtle">放上第二条差异化卖点，减少犹豫。</p>
+        <div class="price">¥ 499</div>
+        <div>
+          <a class="btn" href="#" data-paylink title="前往支付或咨询">立即购买</a>
+        </div>
+      </article>
+      <!-- 产品卡片 3 -->
+      <article class="product glass">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1200&auto=format&fit=crop" alt="产品 C 图" />
+        </div>
+        <h3>产品 C</h3>
+        <p class="subtle">补充场景/材质/规格等关键信息。</p>
+        <div class="price">¥ 899</div>
+        <div>
+          <a class="btn" href="#" data-paylink title="前往支付或咨询">立即购买</a>
+        </div>
+      </article>
+      <!-- 产品卡片 4 -->
+      <article class="product glass">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?q=80&w=1200&auto=format&fit=crop" alt="产品 D 图" />
+        </div>
+        <h3>产品 D</h3>
+        <p class="subtle">第三方背书、奖项或质保承诺。</p>
+        <div class="price">¥ 1299</div>
+        <div>
+          <a class="btn" href="#" data-paylink title="前往支付或咨询">立即购买</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 关于 & 联系 -->
+  <section id="about" class="section container">
+    <div class="about">
+      <div class="glass card">
+        <h2>关于我们</h2>
+        <p class="subtle">用 2–4 句话讲清楚：我们是谁、做什么、为什么值得信赖（资质、年限、服务人次、核心优势）。</p>
+        <ul>
+          <li>✔ 正品保证与7天无忧退换（示例）</li>
+          <li>✔ 全国范围发货，48 小时内处理</li>
+          <li>✔ 一对一客服，售前售后直达</li>
+        </ul>
+      </div>
+      <div class="glass card" id="contact">
+        <h2>联系我们</h2>
+        <p class="hint">表单示例：把 action 地址换成你的 Formspree / 飞书表单 / 企业邮局。</p>
+        <form action="https://formspree.io/f/你的ID" method="POST">
+          <input name="name" placeholder="你的称呼" required />
+          <input name="email" type="email" placeholder="邮箱（用于回复）" required />
+          <textarea name="message" rows="4" placeholder="我想咨询…" required></textarea>
+          <button class="btn" type="submit">发送消息</button>
+          <p class="hint">或直接邮件：<a href="mailto:hi@example.com">hi@example.com</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 政策 -->
+  <section id="policies" class="section container glass card">
+    <h2>政策与条款</h2>
+    <p class="subtle">把下面 3 个锚点的内容替换成你的正式文本：退换货政策、隐私政策、服务条款。上线前务必检查是否符合你的经营区域法规。</p>
+    <details>
+      <summary><strong>退换货政策（示例）</strong></summary>
+      <p>自签收起 7 日内可申请退换；需保持商品及包装完整、影响二次销售。非质量问题退货产生的运费由买家承担。</p>
+    </details>
+    <details>
+      <summary><strong>隐私政策（示例）</strong></summary>
+      <p>我们仅收集完成订单与售后所需的最少信息，不出售你的数据。更多细则请邮件联系我们。</p>
+    </details>
+    <details>
+      <summary><strong>服务条款（示例）</strong></summary>
+      <p>本网站所售商品按照国家相关法规执行质保与售后服务；因不可抗力造成的延误不承担连带责任。</p>
+    </details>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <div>© <span id="y"></span> 你的品牌 — All rights reserved.</div>
+      <div class="policies">
+        <a href="#policies">退换货</a>
+        <a href="#policies">隐私</a>
+        <a href="#policies">条款</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 年份与移动抽屉导航
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const btn = document.querySelector('.menu-btn');
+    const drawer = document.getElementById('drawer');
+    btn?.addEventListener('click',()=>{
+      const open = drawer.style.display === 'block';
+      drawer.style.display = open ? 'none':'block';
+      btn.setAttribute('aria-expanded', String(!open));
+    });
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    // 购买按钮：把 data-paylink 的 href 改为你的支付链接（示例逻辑）
+    document.querySelectorAll('[data-paylink]').forEach(btn=>{
+      // 这里留空，供你直接把 href 改成 Stripe / 微信支付 / 小程序链接
+      // 例如：btn.href = 'https://buy.stripe.com/xxxxxx';
+    });
+  </script>
+</body>
+</html>
